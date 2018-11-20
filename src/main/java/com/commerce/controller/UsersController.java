@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rest")
 public class UsersController {
 
     private final UsersService usersService;
@@ -19,11 +18,6 @@ public class UsersController {
     @Autowired
     public UsersController(@Qualifier("usersServiceImpl") UsersService usersService) {
         this.usersService = usersService;
-    }
-
-    @GetMapping("/")
-    public String sayHello(){
-        return "db-user-service\t\t[UP]";
     }
 
     @PostMapping("/add")

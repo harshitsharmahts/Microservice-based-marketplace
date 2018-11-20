@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 		"com.commerce.repository",
 		"com.commerce.service"
 })
-@EnableMongoRepositories(basePackages = "com.commerce.repository")
+@EnableMongoRepositories("com.commerce.repository")
 @SpringBootApplication
 @EnableEurekaClient
 public class DbUserApplication {
