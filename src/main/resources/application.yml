@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: db-item-service
+  data:
+    mongodb:
+      database: example
+      host: localhost
+      port: 27017
+
+server:
+  port: 8082
+
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/
+  instance:
+    hostname: localhost

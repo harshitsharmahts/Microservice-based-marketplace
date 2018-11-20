@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rest")
 public class ItemsController {
 
     private final ItemsService service;
@@ -19,9 +19,10 @@ public class ItemsController {
         this.service = service;
     }
 
-    @GetMapping("/all")
-    public List<Items> getAllItems(){
-        return service.getAllItems();
+    @GetMapping("/items/{page}/{size}")
+    public List<Items> getAllItems(@PathVariable Integer page,
+                                   @PathVariable Integer size){
+        return service.getAllItems(page,size);
     }
 
     @GetMapping("/item/{id}")
@@ -42,10 +43,5 @@ public class ItemsController {
     @DeleteMapping("/delete")
     public Items deleteItem(String itemId) {
         return service.deleteItem(itemId);
-    }
-
-    @GetMapping("/all/{page-number}")
-    public List<Items> getByPage(@PathVariable("page-number") int pageNumber) {
-        return service.getByPage(pageNumber);
     }
 }
