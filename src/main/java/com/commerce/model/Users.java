@@ -7,6 +7,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+/**
+ *
+ * <p>
+ *     Model bean class to hold the information of an user.
+ * </p>
+ *
+ * @Author Harshit Sharma
+ */
+
 @Document(collection="users")
 public class Users {
 
