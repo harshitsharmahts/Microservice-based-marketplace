@@ -4,6 +4,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+/**
+ * Model bean class to hold all the information about Items.
+ * @Author Harshit Sharma
+ */
 @Document(collection = "items")
 public class Items {
 

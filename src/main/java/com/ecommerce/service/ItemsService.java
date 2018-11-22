@@ -1,7 +1,6 @@
 package com.ecommerce.service;
 
 import com.ecommerce.model.Items;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -12,5 +11,4 @@ public interface ItemsService {
     List<Items> getAllItems(int page, int size);
     Items getItem(String itemId);
     List<Items> getAllItems(String keyword);
-//    List<Items> getByPage(Pageable pageable);
 }
