@@ -35,4 +35,14 @@ public interface UsersService {
 	 * @param authToken
 	 */
 	void deleteUser(String authToken);
+
+	/**
+	 * <p>
+	 *     Abstract method to get the user by email.
+	 * </p>
+	 * @param email
+	 * @return
+	 */
+	Users getUser(String email);
+
 }

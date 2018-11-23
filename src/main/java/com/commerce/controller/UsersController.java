@@ -6,11 +6,8 @@ import com.commerce.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * A controller to handle all user based database operations.
@@ -76,8 +73,22 @@ public class UsersController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+
+    /**
+     *
+     * @param email
+     * @return
+     */
+    @GetMapping("/get/{email}")
+    public ResponseEntity<Users> getUser(@PathVariable("email") String email) {
+        Users u = usersService.getUser(email);
+        return new ResponseEntity<>(u, HttpStatus.OK);
+    }
+
     @GetMapping("/check")
     public String sayHello() {
         return "Users DB-Service \t\t--\t\t [UP]";
     }
+
 }
+
