@@ -1,5 +1,11 @@
 package com.ecommerce.model;
 
+/**
+ * <p>
+ *     LoginCredentials model class to hold the login credentials of a user.
+ * </p>
+ * @author Harshit Sharma
+ */
 public class LoginCredentials {
 
     private String email;

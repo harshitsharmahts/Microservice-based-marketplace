@@ -3,6 +3,14 @@ package com.ecommerce.model;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * <p>
+ *     Model class to hold the details of user.
+ *     This model will going to be used to send POST request and get the response from user-db micro-service.
+ * </p>
+ * @author Harshit Sharma
+ */
+
 public class Users {
 
     private String id;
