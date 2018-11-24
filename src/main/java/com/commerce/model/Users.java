@@ -10,10 +10,10 @@ import org.springframework.data.mongodb.core.mapping.Field;
 /**
  *
  * <p>
- *     Model bean class to hold the information of an user.
+ *     MongoDB JPA Model bean class to hold the information of an user.
  * </p>
  *
- * @Author Harshit Sharma
+ * @author Harshit Sharma
  */
 
 @Document(collection="users")

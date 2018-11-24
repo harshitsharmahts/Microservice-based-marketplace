@@ -15,7 +15,7 @@ import java.util.Optional;
  * <p>
  *      Implementation of interface {@link UsersService}
  * </p>
- * @Author Harshit Sharma
+ * @author Harshit Sharma
  * @see {@link UsersService}
  */
 

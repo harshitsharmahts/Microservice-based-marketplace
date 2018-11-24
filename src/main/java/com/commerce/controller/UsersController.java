@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * A controller to handle all user based database operations.
- * @Author Harshit Sharma
+ * @author Harshit Sharma
  */
 
 @RestController
@@ -27,7 +27,12 @@ public class UsersController {
 
     /**
      * <p>
-     *     Adds the new user(User's basic information) into the database.
+     *     Adds the new user(User's basic information) into the database.<br><br>
+     *     Endpoint: /user/ <br>
+     *     HttpMethod: POST <br>
+     *     Consumes: application/json <br>
+     *     Produces: application/json <br>
+     *     RequestBody:  {@link Users}
      * </p>
      *
      * @param user the users details that you want to store into the database.
@@ -44,7 +49,12 @@ public class UsersController {
 
     /**
      * <p>
-     *     Updates the user's information into the database by the provided user.
+     *     Updates the user's information into the database by the provided user.<br><br>
+     *     Endpoint: /user/ <br>
+     *     HttpMethod: PUT <br>
+     *     Consumes: application/json <br>
+     *     Produces: application/json <br>
+     *     RequestBody:  {@link Users}
      * </p>
      *
      * @param user object of {@link Users} class, with the properties that you want to update.
@@ -60,7 +70,12 @@ public class UsersController {
 
     /**
      * <p>
-     *     Deletes the user's entire information for the provided user's id.
+     *     Deletes the user's entire information for the provided user's id.<br><br>
+     *     Endpoint: /user/{id} <br>
+     *     HttpMethod: DELETE <br>
+     *     PathVariable: {@link String} User's id <br>
+     *     Consumes: application/json <br>
+     *     Produces: No_Content <br>
      * </p>
      *
      * @param id the users's id that you want to remove from the database.
@@ -75,7 +90,14 @@ public class UsersController {
 
 
     /**
-     *
+     * <p>
+     *     Fetches the user by email.<br><br>
+     *     Endpoint: /user/get/{email} <br>
+     *     HttpMethod: GET <br>
+     *     PathVariable: {@link String} User's email <br>
+     *     Consumes: application/json <br>
+     *     Produces: No_Content <br>
+     * </p>
      * @param email
      * @return
      */
