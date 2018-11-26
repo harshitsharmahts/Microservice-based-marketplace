@@ -29,16 +29,28 @@ public class Items {
     @Field("image_url")
     private String imageUrl;
 
+    @Field("is_suspended")
+    private String suspended;
+
+    public String getSuspended() {
+        return suspended;
+    }
+
+    public void setSuspended(String suspended) {
+        this.suspended = suspended;
+    }
+
     public Items() {
 
     }
 
-    public Items(String title, String description, Integer price, Short itemCount, String imageUrl) {
+    public Items(String title, String description, Integer price, Short itemCount, String imageUrl, String suspended) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.itemCount = itemCount;
         this.imageUrl = imageUrl;
+        this.suspended = suspended;
     }
 
     public String getId() {
