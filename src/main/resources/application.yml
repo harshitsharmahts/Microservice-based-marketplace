@@ -16,5 +16,8 @@ zuul:
   prefix: /api
   routes:
     db-user-service:
-      path: /db-service/**
+      path: /user-rest/**
       url: http://localhost:8081
+    db-item-service:
+      path: /item-rest/**
+      url: http://localhost:8082
