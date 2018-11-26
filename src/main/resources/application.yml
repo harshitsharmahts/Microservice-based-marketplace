@@ -1,0 +1,5 @@
+amazonProperties:
+  endpointUrl: https://s3.amazonaws.com
+  accessKey: AKIAI5DBCHH2DLJSADGA
+  secretKey: 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
+  bucketName: microservice-image
