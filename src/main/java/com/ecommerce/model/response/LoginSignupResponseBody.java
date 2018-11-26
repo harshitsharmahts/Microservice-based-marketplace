@@ -2,10 +2,12 @@ package com.ecommerce.model.response;
 
 import com.ecommerce.model.Users;
 
+import java.util.Optional;
+
 public class LoginSignupResponseBody {
 
     private String status;
-    private Users body;
+    private Optional<Users> body;
 
     public LoginSignupResponseBody() {
 
@@ -13,7 +15,7 @@ public class LoginSignupResponseBody {
 
     public LoginSignupResponseBody(String status, Users body) {
         this.status = status;
-        this.body = body;
+        this.body = Optional.of(body);
     }
 
     public String getStatus() {
@@ -25,12 +27,12 @@ public class LoginSignupResponseBody {
         return this;
     }
 
-    public Users getBody() {
+    public Optional<Users> getBody() {
         return body;
     }
 
     public LoginSignupResponseBody setBody(Users body) {
-        this.body = body;
+        this.body = Optional.of(body);
         return this;
     }
 }
