@@ -4,6 +4,7 @@ package com.ecommerce.service;
 import com.ecommerce.model.LoginCredentials;
 import com.ecommerce.model.Users;
 import com.ecommerce.model.response.LoginSignupResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -35,8 +36,7 @@ public interface LoginSignupService {
      *          this body is mainly the information of user.
      *
      */
-    LoginSignupResponseBody signup(Users user);
-
+    LoginSignupResponseBody signup(String fullName, String email, String phoneNumber, String password, String address, MultipartFile profilePic);
     /**
      * <p>
      *     This abstract function's implementation would be responsible
@@ -49,4 +49,6 @@ public interface LoginSignupService {
      *
      */
     LoginSignupResponseBody loginAsManager(LoginCredentials loginCredentials);
+
+
 }

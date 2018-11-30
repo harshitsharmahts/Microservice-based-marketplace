@@ -1,7 +1,6 @@
 package com.ecommerce.controller;
 
 import com.ecommerce.model.LoginCredentials;
-import com.ecommerce.model.Users;
 import com.ecommerce.model.response.LoginSignupResponseBody;
 import com.ecommerce.service.LoginSignupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -70,16 +70,30 @@ public class LoginSignupController {
      *                   }
      *
      * </p>
-     * @param user the user's basic details.
+     *  the user's basic details.
      *             email & password must be provided.
      * @return the {@link LoginSignupResponseBody} that binds the status of response along with the body.
      *          this body is mainly the information of user.
      *
-     * @see {@link LoginSignupService#signup(Users)}
+     * @see {@link LoginSignupService#signup(String, String, String, String, String, MultipartFile)}
      */
     @PostMapping("/signup")
-    public ResponseEntity<LoginSignupResponseBody> signup (@RequestBody Users user) {
-        LoginSignupResponseBody s = service.signup(user);
+    public ResponseEntity<LoginSignupResponseBody> signup (
+            String fullName,
+            String email,
+            String phoneNumber,
+            String password,
+            String address,
+            MultipartFile profilePic
+    ) {
+        LoginSignupResponseBody s = service.signup(
+                fullName,
+                email,
+                phoneNumber,
+                password,
+                address,
+                profilePic
+        );
         return new ResponseEntity<>(s,HttpStatus.OK);
     }
 

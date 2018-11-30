@@ -4,10 +4,12 @@ import com.ecommerce.model.LoginCredentials;
 import com.ecommerce.model.Users;
 import com.ecommerce.model.constant.C;
 import com.ecommerce.model.response.LoginSignupResponseBody;
+import com.ecommerce.service.amazon.AmazonS3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -20,10 +22,12 @@ import org.springframework.web.client.RestTemplate;
 public class LoginSignupServiceImpl implements LoginSignupService {
 
     private final RestTemplate restTemplate;
+    private final AmazonS3Service aWservice;
 
     @Autowired
-    public LoginSignupServiceImpl(RestTemplate restTemplate) {
+    public LoginSignupServiceImpl(RestTemplate restTemplate, AmazonS3Service aWservice) {
         this.restTemplate = restTemplate;
+        this.aWservice = aWservice;
     }
 
     @Override
@@ -45,8 +49,7 @@ public class LoginSignupServiceImpl implements LoginSignupService {
                 .setBody(u);
     }
 
-    @Override
-    public LoginSignupResponseBody signup(Users user) {
+    private LoginSignupResponseBody signup(Users user) {
         HttpHeaders httpHeaders = getHeader();
 
         Users u = restTemplate
@@ -62,6 +65,20 @@ public class LoginSignupServiceImpl implements LoginSignupService {
         return new LoginSignupResponseBody()
                 .setStatus(C.STATUS.SIGNUP_SUCCESS)
                 .setBody(newUser);
+    }
+
+    @Override
+    public LoginSignupResponseBody signup(String fullName, String email, String phoneNumber, String password, String address, MultipartFile profilePic) {
+        String imgurl = aWservice.uploadFileTos3bucket(profilePic);
+        Users u = new Users()
+                .setFullName(fullName)
+                .setAddress(address)
+                .setEmail(email)
+                .setPhoneNumber(phoneNumber)
+                .setPassword(password)
+                .setProfilePic(imgurl);
+
+        return signup(u);
     }
 
     @Override
