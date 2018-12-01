@@ -13,7 +13,7 @@ public class C {
     }
 
     public static class REST {
-        private static final String BASE_URL = "http://localhost:8081/user";
+        private static final String BASE_URL = "http://db-user-service/user";
         public static final String GET_URL = BASE_URL + "/get/{email}";
         public static final String ADD_URL = BASE_URL + "/";
     }
