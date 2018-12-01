@@ -9,7 +9,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @ComponentScan({
 		"com.commerce.controller",
 		"com.commerce.repository",
-		"com.commerce.service"
+		"com.commerce.service",
+		"com.commerce.config"
 })
 @EnableMongoRepositories("com.commerce.repository")
 @SpringBootApplication
