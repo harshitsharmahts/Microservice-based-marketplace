@@ -47,7 +47,9 @@ public class AmazonS3Service {
 
     private File convertMultiPartToFile(MultipartFile file) throws IOException {
         File convFile = new File(file.getOriginalFilename());
-        file.transferTo(convFile);
+        FileOutputStream fileOutputStream = new FileOutputStream(convFile);
+        fileOutputStream.write(file.getBytes());
+        fileOutputStream.close();
         return convFile;
     }
     private void uploadFile(String fileName, File file) {

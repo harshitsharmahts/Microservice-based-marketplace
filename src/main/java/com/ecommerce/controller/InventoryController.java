@@ -23,6 +23,11 @@ public class InventoryController {
         this.service = service;
     }
 
+    @GetMapping("/check")
+    public String statusCheck() {
+        return "Inventory Service\t\t-----\t\t [UP]";
+    }
+
     @GetMapping("/items/{page}/{size}")
     public ResponseEntity<ItemResponseBody<List<Items>>> getAll(@PathVariable("page") Integer page,
                                                                @PathVariable("size") Integer size) {
