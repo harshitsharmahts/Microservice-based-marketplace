@@ -1,7 +1,8 @@
 package com.ecommerce.controller;
 
 import com.ecommerce.model.LoginCredentials;
-import com.ecommerce.model.response.LoginSignupResponseBody;
+import com.ecommerce.model.Users;
+import com.ecommerce.model.response.JSONResponse;
 import com.ecommerce.service.LoginSignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -43,16 +43,16 @@ public class LoginSignupController {
      * </p>
      * @param loginCredentials the {@link LoginCredentials} that contains the user's email and the password.
      *
-     * @return the {@link LoginSignupResponseBody} that binds the status of response along with the body.
+     * @return the {@link JSONResponse} that binds the status of response along with the body.
      *          this body is mainly the information of user.
      *
      * @see {@link LoginSignupService#login(LoginCredentials)}
      */
 
     @PostMapping("/login")
-    public ResponseEntity<LoginSignupResponseBody> login (@RequestBody LoginCredentials loginCredentials) {
-        LoginSignupResponseBody s = service.login(loginCredentials);
-        return new ResponseEntity<>(s, HttpStatus.OK);
+    public ResponseEntity<JSONResponse> login (@RequestBody LoginCredentials loginCredentials) {
+        JSONResponse<Users> jsonResponse = service.login(loginCredentials);
+        return new ResponseEntity<>(jsonResponse, HttpStatus.OK);
     }
 
     /**
@@ -72,29 +72,15 @@ public class LoginSignupController {
      * </p>
      *  the user's basic details.
      *             email & password must be provided.
-     * @return the {@link LoginSignupResponseBody} that binds the status of response along with the body.
+     * @return the {@link JSONResponse} that binds the status of response along with the body.
      *          this body is mainly the information of user.
      *
-     * @see {@link LoginSignupService#signup(String, String, String, String, String, MultipartFile)}
+     * @see {@link LoginSignupService#signup(Users)}
      */
     @PostMapping("/signup")
-    public ResponseEntity<LoginSignupResponseBody> signup (
-            String fullName,
-            String email,
-            String phoneNumber,
-            String password,
-            String address,
-            MultipartFile profilePic
-    ) {
-        LoginSignupResponseBody s = service.signup(
-                fullName,
-                email,
-                phoneNumber,
-                password,
-                address,
-                profilePic
-        );
-        return new ResponseEntity<>(s,HttpStatus.OK);
+    public ResponseEntity<JSONResponse> signup (@RequestBody Users user) {
+        JSONResponse<Users> jsonResponse = service.signup(user);
+        return new ResponseEntity<>(jsonResponse,HttpStatus.OK);
     }
 
     /**
@@ -111,14 +97,15 @@ public class LoginSignupController {
      * </p>
      * @param loginCredentials the {@link LoginCredentials} that contains the user's email and the password.
      *
-     * @return the {@link LoginSignupResponseBody} that binds the status of response along with the body.
+     * @return the {@link JSONResponse} that binds the status of response along with the body.
      *          this body is mainly the information of user.
      *
      * @see {@link LoginSignupService#login(LoginCredentials)}
      */
-    @PostMapping("/login-as-manager")
-    public ResponseEntity<LoginSignupResponseBody> loginAsManager(LoginCredentials loginCredentials) {
-        LoginSignupResponseBody b = service.loginAsManager(loginCredentials);
-        return new ResponseEntity<>(b, HttpStatus.OK);
+    @PostMapping("/admin/login")
+    public ResponseEntity<JSONResponse> loginAsManager(@RequestBody LoginCredentials loginCredentials) {
+        JSONResponse<Users> jsonResponse = service.loginAsManager(loginCredentials);
+        return new ResponseEntity<>(jsonResponse, HttpStatus.OK);
     }
 }
+

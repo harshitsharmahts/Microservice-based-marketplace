@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan({
 		"com.ecommerce.controller",
 		"com.ecommerce.service",
-		"com.ecommerce.service.amazon",
+		"com.ecommerce.service.rest",
 		"com.ecommerce.LoginSignup"
 })
 @SpringBootApplication

@@ -3,8 +3,7 @@ package com.ecommerce.service;
 
 import com.ecommerce.model.LoginCredentials;
 import com.ecommerce.model.Users;
-import com.ecommerce.model.response.LoginSignupResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import com.ecommerce.model.response.JSONResponse;
 
 /**
  * <p>
@@ -21,10 +20,10 @@ public interface LoginSignupService {
      * </p>
      * @param loginCredentials the {@link LoginCredentials} that contains the user's email and the password.
      *
-     * @return the {@link LoginSignupResponseBody} that binds the status of response along with the body.
+     * @return the {@link JSONResponse} that binds the status of response along with the body.
      *          this body is mainly the information of user.
      */
-    LoginSignupResponseBody login(LoginCredentials loginCredentials);
+    JSONResponse<Users> login(LoginCredentials loginCredentials);
 
     /**
      * <p>
@@ -32,11 +31,11 @@ public interface LoginSignupService {
      * </p>
      * @param user the user's basic details.
      *             email & password must be provided.
-     * @return the {@link LoginSignupResponseBody} that binds the status of response along with the body.
+     * @return the {@link JSONResponse} that binds the status of response along with the body.
      *          this body is mainly the information of user.
      *
      */
-    LoginSignupResponseBody signup(String fullName, String email, String phoneNumber, String password, String address, MultipartFile profilePic);
+    JSONResponse<Users> signup(Users user);
     /**
      * <p>
      *     This abstract function's implementation would be responsible
@@ -44,11 +43,11 @@ public interface LoginSignupService {
      * </p>
      * @param loginCredentials the {@link LoginCredentials} that contains the user's email and the password.
      *
-     * @return the {@link LoginSignupResponseBody} that binds the status of response along with the body.
+     * @return the {@link JSONResponse} that binds the status of response along with the body.
      *          this body is mainly the information of user.
      *
      */
-    LoginSignupResponseBody loginAsManager(LoginCredentials loginCredentials);
+    JSONResponse<Users> loginAsManager(LoginCredentials loginCredentials);
 
 
 }
