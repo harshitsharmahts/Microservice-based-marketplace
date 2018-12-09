@@ -13,18 +13,28 @@ public class Items {
     private Short itemCount;
     private String imageUrl;
     private boolean suspended;
+    private String soldTo;
 
     public Items() {
 
     }
 
-    public Items(String title, String description, Integer price, Short itemCount, String imageUrl, boolean suspended) {
+    public Items(String title, String description, Integer price, Short itemCount, String imageUrl, boolean suspended, String soldTo) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.itemCount = itemCount;
         this.imageUrl = imageUrl;
         this.suspended = suspended;
+        this.soldTo = soldTo;
+    }
+
+    public String getSoldTo() {
+        return soldTo;
+    }
+
+    public void setSoldTo(String soldTo) {
+        this.soldTo = soldTo;
     }
 
     public boolean isSuspended() {

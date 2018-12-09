@@ -1,24 +1,24 @@
 package com.ecommerce.model.response;
 
-public class ItemResponseBody<T> {
+public class JSONResponse<T> {
 
-    private String status;
+    private boolean status;
     private T body;
 
-    public ItemResponseBody() {
+    public JSONResponse() {
 
     }
 
-    public ItemResponseBody(String status, T body) {
+    public JSONResponse(boolean status, T body) {
         this.status = status;
         this.body = body;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public ItemResponseBody<T> setStatus(String status) {
+    public JSONResponse<T> setStatus(boolean status) {
         this.status = status;
         return this;
     }
@@ -27,7 +27,7 @@ public class ItemResponseBody<T> {
         return body;
     }
 
-    public ItemResponseBody<T> setBody(T body) {
+    public JSONResponse<T> setBody(T body) {
         this.body = body;
         return this;
     }

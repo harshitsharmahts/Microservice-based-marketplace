@@ -1,7 +1,7 @@
 package com.ecommerce.controller;
 
 import com.ecommerce.model.Items;
-import com.ecommerce.model.response.ItemResponseBody;
+import com.ecommerce.model.response.JSONResponse;
 import com.ecommerce.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,26 +23,26 @@ public class InventoryController {
         this.service = service;
     }
 
-    @GetMapping("/check")
+    @GetMapping("/status")
     public String statusCheck() {
         return "Inventory Service\t\t-----\t\t [UP]";
     }
 
-    @GetMapping("/items/{page}/{size}")
-    public ResponseEntity<ItemResponseBody<List<Items>>> getAll(@PathVariable("page") Integer page,
-                                                               @PathVariable("size") Integer size) {
-        ItemResponseBody<List<Items>> list = service.getAll(page,size);
+    @GetMapping("/{page}/{size}")
+    public ResponseEntity<JSONResponse<List<Items>>> getAll(@PathVariable("page") Integer page,
+                                                            @PathVariable("size") Integer size) {
+        JSONResponse<List<Items>> list = service.getAll(page,size);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/item/{id}")
-    public ResponseEntity<ItemResponseBody<Items>> getItem(@PathVariable("id") String id) {
-        ItemResponseBody<Items> i = service.getItem(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<JSONResponse<Items>> getItem(@PathVariable("id") String id) {
+        JSONResponse<Items> i = service.getItem(id);
         return  new ResponseEntity<>(i, HttpStatus.OK);
     }
 
-    @PostMapping("/item")
-    public ResponseEntity<ItemResponseBody<Items>> addItem(
+    @PostMapping("/")
+    public ResponseEntity<JSONResponse<Items>> addItem(
             String title,
             String description,
             Integer price,
@@ -51,7 +51,7 @@ public class InventoryController {
             boolean suspended
     ) {
 
-        ItemResponseBody<Items> i = service.addItem(
+        JSONResponse<Items> i = service.addItem(
                 title,
                 description,
                 price,
@@ -63,8 +63,8 @@ public class InventoryController {
         return new ResponseEntity<>(i,HttpStatus.OK);
     }
 
-    @PutMapping("/item")
-    public ResponseEntity<ItemResponseBody<Items>> updateItem(
+    @PutMapping("/")
+    public ResponseEntity<JSONResponse<Items>> updateItem(
             String title,
             String description,
             Integer price,
@@ -72,7 +72,7 @@ public class InventoryController {
             MultipartFile image,
             boolean suspended
     ) {
-        ItemResponseBody<Items> i = service.updateItem(
+        JSONResponse<Items> i = service.updateItem(
                 title,
                 description,
                 price,
@@ -84,21 +84,21 @@ public class InventoryController {
         return new ResponseEntity<>(i,HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/item/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteItem(@PathVariable("id") String id) {
         service.deleteItem(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/item/suspend/{id}")
-    public ResponseEntity<Boolean> suspendItem(@PathVariable("id") String id) {
-        Boolean b = service.suspendItem(id);
-        return new ResponseEntity<>(b, HttpStatus.CREATED);
+    @PutMapping("/suspend/{id}")
+    public ResponseEntity<JSONResponse> suspendItem(@PathVariable("id") String id) {
+        JSONResponse j = service.suspendItem(id);
+        return new ResponseEntity<>(j, HttpStatus.CREATED);
     }
 
-    @PutMapping("/item/un-suspend/{id}")
-    public ResponseEntity<Boolean> unSuspendItem(@PathVariable("id") String id) {
-        Boolean b = service.unSuspendItem(id);
-        return new ResponseEntity<>(b, HttpStatus.CREATED);
+    @PutMapping("/un-suspend/{id}")
+    public ResponseEntity<JSONResponse> unSuspendItem(@PathVariable("id") String id) {
+        JSONResponse j = service.unSuspendItem(id);
+        return new ResponseEntity<>(j, HttpStatus.CREATED);
     }
 }
