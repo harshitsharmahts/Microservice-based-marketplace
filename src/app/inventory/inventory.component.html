@@ -1,0 +1,105 @@
+<div class="wrapper">
+  <div class="page-header clear-filter" filter-color="orange">
+    <div class="page-header-image rellax-header" data-rellax-speed="-7" style="background-image: url('assets/img/header.jpg');">
+    </div>
+    <div class="container">
+      <div class="content-center brand">
+          <img class="n-logo" src="assets/img/now-logo.png" alt="">
+          <h1 class="h1-seo">Microservices</h1>
+          <h3>E-commerce, What else?</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="container" style="padding-top:50px;">
+      <div class="row">
+
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let item of items?.body">
+          <div class="card h-100 m-0">
+            <a href="#"><img class="card-img-top" src="{{item.imageUrl}}" alt="Here I'm"></a>
+            <div class="card-body mt-0">
+              <h5 class="card-title text-primary">{{item.title}}</h5>
+              <h6>Price : &#8377;{{item.price}}</h6>
+            </div>
+            <div class="card-footer p-0 text-center" style="background:#fff;">
+              <button (click)="open(classic,'' , '',(item))" class="btn btn-link btn-info m-0">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #classic let-c="close" let-d="dismiss">
+            <div class="modal-header justify-content-center" style="border-bottom:1px solid #999">
+                <h5 class="title title-up">{{this.modalItem.title}}</h5>
+            </div>
+            <div class="modal-body row">
+                <div class="col-lg-4">
+                  <a href="#"><img class="card-img-top" src="{{this.modalItem.imageUrl}}" alt="{{this.modalItem.title}}"></a>
+                  <h6> Price: &#8377; {{this.modalItem.price}}</h6>
+                </div>
+                <div class="col-lg-8">
+                  <p>{{this.modalItem.description}}</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button (click)="addToCart(this.modalItem.id)" type="button" class="btn btn-default">Add to Cart</button>
+                <button type="button" class="close" (click)="d('Cross click')">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                </button>
+            </div>
+        </ng-template>
+
+      </div>
+    </div>
+      <div class="section section-download" id="#download-section" data-background-color="black">
+          <div class="container">
+              <div class="row justify-content-md-center sharing-area text-center">
+                  <div class="text-center col-md-12 col-lg-8">
+                      <h3>Follow us!</h3>
+                  </div>
+                  <div class="text-center col-md-12 col-lg-8">
+                      <a target="_blank" href="https://www.twitter.com/" class="btn btn-neutral btn-icon btn-twitter btn-round btn-lg" rel="tooltip" title="Follow us">
+                          <i class="fa fa-twitter"></i>
+                      </a>
+                      <a target="_blank" href="https://www.facebook.com/" class="btn btn-neutral btn-icon btn-facebook btn-round btn-lg" rel="tooltip" title="Like us">
+                          <i class="fa fa-facebook-square"></i>
+                      </a>
+                      <a target="_blank" href="https://www.linkedin.com/" class="btn btn-neutral btn-icon btn-linkedin btn-lg btn-round" rel="tooltip" title="Follow us">
+                          <i class="fa fa-linkedin"></i>
+                      </a>
+                      <a target="_blank" href="https://github.com/harshitsharmahts" class="btn btn-neutral btn-icon btn-github btn-round btn-lg" rel="tooltip" title="Star on Github">
+                          <i class="fa fa-github"></i>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <footer class="footer" data-background-color="black">
+      <div class="container">
+          <nav>
+              <ul>
+                  <li>
+                      <a href="">
+                          About Us
+                      </a>
+                  </li>
+                  <li>
+                      <a href="">
+                          Contact Us
+                      </a>
+                  </li>
+                  <li>
+                      <a href="">
+                          Terms and Conditions
+                      </a>
+                  </li>
+              </ul>
+          </nav>
+          <div class="copyright">
+              &copy;
+              {{data | date: 'yyyy'}}, All Right Reserved.
+          </div>
+      </div>
+  </footer>
+</div>

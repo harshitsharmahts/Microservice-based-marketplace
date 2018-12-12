@@ -1,0 +1,143 @@
+<div class="wrapper">
+    <div class="page-header page-header-small" style="height:50px;">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/bg6.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">My Cart ({{cartItems?.items?.length}})</h1>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+
+            <div class="card">
+
+              <div class="card-header">
+                <h4 class="text-primary text-center">Checkout Details</h4>
+              </div>
+              <div class="card-body m-0 text-center" style="min-height: 0px !important;">
+                  <h6 class="">Subtotal ({{cartItems?.items?.length}} item)</h6>
+                  <h2 class="text-danger"> {{cartItems?.invoice}} &#8377;</h2>
+              </div>
+              <div class="card-footer m-0 text-center p-0">
+                <button *ngIf="cartItems?.items.length != 0 && this.authentication.isLoggedIn()" (click)="open(modal_mini, 'modal_mini', 'sm')" class="btn btn-block btn-danger pull-right m-0">Proceed to Checkout</button>
+                <button *ngIf="cartItems?.items.length != 0 && !this.authentication.isLoggedIn()" (click)="open(modal_login, 'Login', undefined)" class="btn btn-block btn-danger pull-right m-0">Proceed to Checkout</button>
+                <button *ngIf="cartItems?.items.length == 0" [routerLink]="['/index']" class="btn btn-block btn-danger pull-right m-0">Continue Shopping!</button>
+              </div>
+
+              <ng-template  #modal_login let-c="close" let-d="dismiss">
+
+
+                <div class="header text-center">
+                  <h4 class="title title-up">Please LogIn!</h4>
+                  <div class="social-line">
+                      <a href="#" class="btn btn-neutral btn-facebook btn-icon btn-round">
+                          <i class="fa fa-facebook-square"></i>
+                      </a>
+                      <a href="#" class="btn btn-neutral btn-twitter btn-icon btn-lg btn-round">
+                          <i class="fa fa-twitter"></i>
+                      </a>
+                      <a href="#" class="btn btn-neutral btn-google btn-icon btn-round">
+                          <i class="fa fa-google-plus"></i>
+                      </a>
+                  </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="input-group form-group-no-border" >
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">  <i class="now-ui-icons users_circle-08"></i></span>
+                      </div>
+                        <input [(ngModel)]="cred.email" type="email" class="form-control" placeholder="Email..." >
+                    </div>
+                    <div class="input-group form-group-no-border" >
+                      <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="now-ui-icons text_caps-small"></i></span>
+                      </div>
+                        <input [(ngModel)]="cred.password" type="password" placeholder="Password..." class="form-control"/>
+                    </div>
+                  </div>
+                  <div class="footer text-center">
+                      <p>{{cred.message}}</p>
+                      <a class="btn btn-primary btn-round btn-lg" (click)="cartLogin()">Login</a>
+                  </div>
+                  <a (click)="closeModal(modal_login)" class="btn btn-link btn-neutral">Don't have an account??</a>
+              </ng-template>
+
+
+              <ng-template  #modal_mini let-c="close" let-d="dismiss">
+
+                  <div class="modal-header justify-content-center">
+                      <div class="modal-profile">
+                          <i class="fa fa-credit-card text-danger"></i>
+                      </div>
+                  </div>
+                  <div class="modal-body">
+                      <p>Payble Ammount : {{cartItems?.invoice}}&#8377;</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-link btn-neutral" (click)="c('Close click')">Cancel</button>
+                      <button type="button" class="btn btn-link btn-neutral" (click)="purchaseNow()">Pay Now</button>
+                  </div>
+
+              </ng-template>
+
+            </div>
+
+          </div>
+          <div class="col-md-8">
+
+            <div class="col-lg-12">
+              <h1 class="text-muted text-center" *ngIf="cartItems?.items.length == 0"> <br>Your Cart is Empty!</h1>
+              <div *ngFor="let item of cartItems?.items" class="card h-100 m-0">
+                <div class="row">
+                  <div class="col-md-4">
+                    <a href="#"><img class="card-img-top" src="{{item.imageUrl}}" alt="Here I'm"></a>
+                  </div>
+                  <div class="card-body mt-0 col-md-8">
+                      <h6 class="text-primary">{{item.title}}</h6>
+                      <h5>&#8377;{{item.price}}</h5>
+                      <p>{{item.description.substring(1,150)}} .....</p>
+                  </div>
+                </div>
+                <div class="card-footer" style="background:#fff;">
+                  <button (click)="deleteItem(item.id)" class="btn btn-danger pull-right">DELETE</button>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer" data-background-color="black">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            Contact Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            Terms and Conditions
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright">
+                &copy;
+                2018, All Right Reserved.
+            </div>
+        </div>
+    </footer>
+</div>
