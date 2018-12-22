@@ -5,7 +5,7 @@ import com.ecommerce.model.Items;
 import java.util.List;
 
 public interface ItemsService {
-    Items addNewItem(Items item);
+    Items addItem(Items item);
     Items updateItem(Items item);
     Items deleteItem(String itemId);
     List<Items> getAllItems(int page, int size);

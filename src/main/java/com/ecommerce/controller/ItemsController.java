@@ -73,14 +73,14 @@ public class ItemsController {
      *             Item ID need not to be supplied/passed,
      *             It'll be generated automatically.
      * @return the newly item that has been inserted.
-     * @see {@link ItemsService#addNewItem(Items)}
+     * @see {@link ItemsService#addItem(Items)}
      */
     @PostMapping("/")
     public ResponseEntity<Items> addNewItem(
 
 
             @RequestBody Items item) {
-        Items i = service.addNewItem(item);
+        Items i = service.addItem(item);
         return new ResponseEntity<>(i, HttpStatus.OK);
 
     }
@@ -113,14 +113,15 @@ public class ItemsController {
      *
      * @see {@link ItemsService#deleteItem(String)}
      */
-    @DeleteMapping("/")
-    public ResponseEntity<Void> deleteItem(String itemId) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteItem(@PathVariable("id") String itemId) {
         service.deleteItem(itemId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/check")
+    @GetMapping("/status")
     public String sayHello() {
         return "Item DB-Service \t\t-\t\t [UP]";
     }
 }
+

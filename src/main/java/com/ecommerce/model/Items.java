@@ -1,5 +1,6 @@
 package com.ecommerce.model;
 
+import jdk.nashorn.internal.objects.annotations.Constructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -8,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * Model bean class to hold all the information about Items.
  * @Author Harshit Sharma
  */
+
 @Document(collection = "items")
 public class Items {
 
@@ -32,6 +34,9 @@ public class Items {
     @Field("is_suspended")
     private String suspended;
 
+    @Field("sold_to")
+    private String soldTo;
+
     public String getSuspended() {
         return suspended;
     }
@@ -44,13 +49,15 @@ public class Items {
 
     }
 
-    public Items(String title, String description, Integer price, Short itemCount, String imageUrl, String suspended) {
+    public Items(String id, String title, String description, Integer price, Short itemCount, String imageUrl, String suspended, String soldTo) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
         this.itemCount = itemCount;
         this.imageUrl = imageUrl;
         this.suspended = suspended;
+        this.soldTo = soldTo;
     }
 
     public String getId() {
@@ -99,5 +106,13 @@ public class Items {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getSoldTo() {
+        return soldTo;
+    }
+
+    public void setSoldTo(String soldTo) {
+        this.soldTo = soldTo;
     }
 }

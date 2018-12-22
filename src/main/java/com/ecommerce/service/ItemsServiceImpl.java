@@ -20,7 +20,7 @@ public class ItemsServiceImpl implements ItemsService {
     }
 
     @Override
-    public Items addNewItem(Items item) {
+    public Items addItem(Items item) {
         return repository.insert(item);
     }
 
