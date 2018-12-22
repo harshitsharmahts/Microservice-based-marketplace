@@ -1,0 +1,63 @@
+<div class="wrapper">
+    <div class="page-header page-header-small" filter-color="orange">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/bg5.jpg') ;">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <div class="photo-container">
+                    <img *ngIf="!mUser?.profilePic" src="../../assets/img/default-profile.png" alt="">
+                    <img *ngIf="mUser?.profilePic" src="{{mUser.profilePic}}" alt="">
+                </div>
+                <h3 class="title">{{mUser?.fullName}}</h3>
+
+                <p *ngIf="!mUser?.phoneNumber" class="category">+91 XXX XXX XXXX</p>
+                <p *ngIf="mUser?.phoneNumber" class="category">{{mUser.phoneNumber}}</p>
+
+                <div class="content">
+                    <div class="social-description">
+                      <h2 *ngIf="!mUser?.checkoutList">
+                        0
+                      </h2>
+                        <h2>{{mUser?.checkoutList?.length}}</h2>
+                        <p>Cart</p>
+                    </div>
+                    <div class="social-description">
+                        <h2 *ngIf="!mUser?.purchaseHistory">
+                          0
+                        </h2>
+                        <h2>{{mUser?.purchaseHistory?.length}}</h2>
+                        <p>Purchase</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer" data-background-color="black">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            Contact Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            Terms and Conditions
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright">
+                &copy;
+                {{data | date: 'yyyy'}}, All Right Reserved.
+            </div>
+        </div>
+    </footer>
+</div>
