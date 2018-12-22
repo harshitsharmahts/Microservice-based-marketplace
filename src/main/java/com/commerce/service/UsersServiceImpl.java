@@ -30,22 +30,22 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-	public Users addNewUser(Users user) {
+	public Users add(Users user) {
 		return repo.insert(user);
 	}
 
 	@Override
-	public Users updateUser(Users user) {
+	public Users update(Users user) {
 		return repo.save(user);
 	}
 
     @Override
-    public void deleteUser(String id) {
+    public void delete(String id) {
         repo.deleteById(id);
     }
 
     @Override
-    public Users getUser(String email) {
+    public Users get(String email) {
         Optional<List<Users>> optional = repo.findByEmail(email);
         List<Users> list = optional.orElse(new ArrayList<>());
 

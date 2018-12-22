@@ -20,7 +20,7 @@ public interface UsersService {
 	 *
 	 * @return the new added user.
 	 */
-	Users addNewUser(Users user);
+	Users add(Users user);
 
 	/**
 	 * <p>
@@ -31,7 +31,7 @@ public interface UsersService {
 	 * @return the updated user.
 	 */
 
-	Users updateUser(Users user);
+	Users update(Users user);
 
 	/**
 	 * <p>
@@ -40,7 +40,7 @@ public interface UsersService {
 	 *
 	 * @param id the users's id that you want to remove from the database.
 	 */
-	void deleteUser(String id);
+	void delete(String id);
 
 	/**
 	 * <p>
@@ -49,6 +49,6 @@ public interface UsersService {
 	 * @param email the email of the user/
 	 * @return the document stored in Users collection.
 	 */
-	Users getUser(String email);
+	Users get(String email);
 
 }
