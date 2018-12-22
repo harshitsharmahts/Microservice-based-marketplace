@@ -18,7 +18,7 @@ public class Rest {
     @Value("${rest.item.add}")
     private String ADD_URL;
 
-    @Value("$rest.item.get")
+    @Value("${rest.item.get}")
     private String GET_URL;
 
     @Value("${rest.item.update}")
