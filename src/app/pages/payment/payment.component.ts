@@ -8,11 +8,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  selector: 'app-pay',
+  templateUrl: './payment.component.html',
+  styleUrls: ['./payment.component.scss']
 })
-export class CartComponent implements OnInit {
+export class PaymentComponent implements OnInit {
 
   cartItems:any;
   returnUrl:string;
@@ -24,11 +24,7 @@ export class CartComponent implements OnInit {
               public authentication : AuthenticationService,
               private cookie : CookieService,
               private router : Router) {
-
-    if(!this.authentication.isLoggedIn()) {
-      this.cookie.initCartWithoutLogin();
-    }
-    this.loadCartItems();
+                this.loadCartItems();
   }
 
   ngOnInit() {
@@ -46,18 +42,6 @@ export class CartComponent implements OnInit {
     navbar.classList.remove('navbar-transparent');
   }
 
-  open(content, type, modalDimension) {
-      if (modalDimension === 'sm' && type === 'modal_mini') {
-          this.modalReference = this.modalService.open(content, { windowClass: 'modal-mini modal-danger', size: 'sm' });
-      } else if (modalDimension == undefined && type === 'Login') {
-        this.modalReference = this.modalService.open(content, { windowClass: 'modal-login modal-danger' });
-      }
-  }
-
-  closeModal() {
-    this.modalReference.close();
-  }
-
   private loadCartItems() {
     if(this.authentication.isLoggedIn()) {
       this.cartService.getCartItems()
@@ -69,29 +53,13 @@ export class CartComponent implements OnInit {
     }
   }
 
-  cartLogin() {
-    this.authentication.login(this.cred.email, this.cred.password)
-      .subscribe(response => {
-        if(response == null) {
-          this.cartService.addItems();
-          this.closeModal();
-          this.router.navigate(['/payment'], {queryParams:{loggedIn:true}});
-        } else {
-          this.cred.message = response.strong + response.message;
-        }
-      });
-  }
-
-  deleteItem(itemId : string) {
+  purchaseNow() {
     if(this.authentication.isLoggedIn()) {
-      this.cartService.deleteItemFromCart(itemId)
+      this.cartService.purchase()
         .subscribe(response => {
-          this.loadCartItems();
-      });
-    } else {
-      console.log();
-      this.cookie.removeFromCart(itemId);
-      this.loadCartItems();
+          this.modalReference.close();
+          this.router.navigate(['/history']);
+        });
     }
   }
 }

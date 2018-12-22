@@ -23,7 +23,7 @@
                   <h2 class="text-danger"> {{cartItems?.invoice}} &#8377;</h2>
               </div>
               <div class="card-footer m-0 text-center p-0">
-                <button *ngIf="cartItems?.items.length != 0 && this.authentication.isLoggedIn()" (click)="open(modal_mini, 'modal_mini', 'sm')" class="btn btn-block btn-danger pull-right m-0">Proceed to Checkout</button>
+                <button *ngIf="cartItems?.items.length != 0 && this.authentication.isLoggedIn()" [routerLink]="['/payment']" class="btn btn-block btn-danger pull-right m-0">Proceed to Checkout</button>
                 <button *ngIf="cartItems?.items.length != 0 && !this.authentication.isLoggedIn()" (click)="open(modal_login, 'Login', undefined)" class="btn btn-block btn-danger pull-right m-0">Proceed to Checkout</button>
                 <button *ngIf="cartItems?.items.length == 0" [routerLink]="['/index']" class="btn btn-block btn-danger pull-right m-0">Continue Shopping!</button>
               </div>
@@ -64,24 +64,6 @@
                       <a class="btn btn-primary btn-round btn-lg" (click)="cartLogin()">Login</a>
                   </div>
                   <a (click)="closeModal(modal_login)" class="btn btn-link btn-neutral">Don't have an account??</a>
-              </ng-template>
-
-
-              <ng-template  #modal_mini let-c="close" let-d="dismiss">
-
-                  <div class="modal-header justify-content-center">
-                      <div class="modal-profile">
-                          <i class="fa fa-credit-card text-danger"></i>
-                      </div>
-                  </div>
-                  <div class="modal-body">
-                      <p>Payble Ammount : {{cartItems?.invoice}}&#8377;</p>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-link btn-neutral" (click)="c('Close click')">Cancel</button>
-                      <button type="button" class="btn btn-link btn-neutral" (click)="purchaseNow()">Pay Now</button>
-                  </div>
-
               </ng-template>
 
             </div>

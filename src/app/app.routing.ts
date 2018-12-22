@@ -9,6 +9,7 @@ import { HistoryComponent } from './pages/history/history.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 import { LoginGuard } from './_guards/login.guard';
 import { LogoutGuard } from './_guards/logout.guard';
@@ -18,6 +19,7 @@ const routes: Routes =[
     { path: '', redirectTo: 'index', pathMatch: 'full' },
     { path: 'index',                component: InventoryComponent},
     { path: 'cart',     component: CartComponent },
+    { path: 'payment',     component: PaymentComponent },
     { path: 'history',     component: HistoryComponent, canActivate: [LoginGuard]},
     { path: 'login',       component: LoginComponent, canActivate: [LogoutGuard]},
     { path: 'signup',       component: SignupComponent, canActivate: [LogoutGuard]},

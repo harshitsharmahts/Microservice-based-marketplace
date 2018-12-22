@@ -11,6 +11,7 @@ import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
+import { PaymentComponent } from './payment/payment.component';
 import { PagesComponent } from './pages.component';
 import { HistoryComponent } from './history/history.component';
 
@@ -24,6 +25,7 @@ import { ProfileService} from '../_services/profile.service';
         CartComponent,
         LoginComponent,
         SignupComponent,
+        PaymentComponent,
         HistoryComponent
     ],
     imports: [
