@@ -1,4 +1,4 @@
-# Online Deal Finder
+# Microservice-based-marketplace
 
 E-marketplace is the microservice based e-commerce, where the items for puchase uploaded by the administrator and all the uploaded items will appear to the customes for purchase.
   
