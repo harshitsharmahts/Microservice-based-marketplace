@@ -1,0 +1,25 @@
+rest:
+  user:
+    get: http://db-user-service/user/{email}
+    update: http://db-user-service/user/
+  item:
+    get: http://db-item-service/item/{id}
+    update: http://db-item-service/item/
+
+
+spring:
+  application:
+    name: cart-service
+
+server:
+  port: 8085
+
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/
+  instance:
+    hostname: localhost
