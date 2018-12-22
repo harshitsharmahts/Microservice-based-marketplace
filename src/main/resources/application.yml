@@ -1,0 +1,20 @@
+rest:
+  user:
+    get: http://db-user-service/user/{email}
+    add: http://db-user-service/user/
+
+spring:
+  application:
+    name: login-signup-service
+
+server:
+  port: 8084
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/
+  instance:
+    hostname: localhost
