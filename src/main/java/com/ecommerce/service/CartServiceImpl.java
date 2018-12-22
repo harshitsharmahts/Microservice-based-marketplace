@@ -1,8 +1,9 @@
 package com.ecommerce.service;
 
 import com.ecommerce.model.Items;
+import com.ecommerce.model.JSONCart;
 import com.ecommerce.model.Users;
-import com.ecommerce.model.response.CartResponseBody;
+import com.ecommerce.model.response.JSONResponse;
 import com.ecommerce.rest.Rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,39 +22,54 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartResponseBody<List<String>> addItemToCart(String itemId, String userName) {
+    public JSONResponse addItemToCart(String itemId, String userName) {
         Users u = rest.getUser(userName);
+
+        if(u == null)
+            return JSONResponse.negative();
+
         List<String> list = u.getCheckoutList().orElse(new ArrayList<>());
-        list.add(itemId);
-        u.setCheckoutList(list);
 
-        if(!rest.updateUser(u))
-            return new CartResponseBody<List<String>>().setStatus(false);
+        if(!list.contains(itemId)) {
+            list.add(itemId);
+            u.setCheckoutList(list);
 
-        return new CartResponseBody<List<String>>()
-                .setStatus(true)
-                .setBody(list);
+            if(!rest.updateUser(u))
+                return JSONResponse.negative();
+        }
+
+        return JSONResponse.positive();
+
     }
 
     @Override
-    public CartResponseBody<List<String>> removeItemFromCart(String itemId, String userName) {
+    public JSONResponse removeItemFromCart(String itemId, String userName) {
         Users u = rest.getUser(userName);
+
+        if(u == null)
+            return JSONResponse.negative();
+
         List<String> list = u.getCheckoutList().orElse(new ArrayList<>());
-        list.remove(itemId);
-        u.setCheckoutList(list);
 
-        if(!rest.updateUser(u))
-            return new CartResponseBody<List<String>>().setStatus(false);
+        if(list.contains(itemId)) {
+            list.remove(itemId);
+            u.setCheckoutList(list);
 
-        return new CartResponseBody<List<String>>()
-                .setStatus(true)
-                .setBody(list);
+            if (!rest.updateUser(u))
+                return JSONResponse.negative();
+        }
+
+        return JSONResponse.positive();
     }
 
     @Override
-    public CartResponseBody<List<Items>> getAllCheckedOutItems(String userName) {
+    public JSONResponse<JSONCart> getAllCheckedOutItems(String userName) {
 
         Users u = rest.getUser(userName);
+
+        if( u == null)
+            return new JSONResponse<JSONCart>().setStatus(false);
+
         List<String> list = u.getCheckoutList().orElse(new ArrayList<>());
 
         List<Items> listItems = new ArrayList<>();
@@ -62,15 +78,20 @@ public class CartServiceImpl implements CartService {
             listItems.add(i);
         });
 
-        return new CartResponseBody<List<Items>>()
+        JSONCart jsonCart = new JSONCart().setItems(listItems).calculateInvoice();
+
+        return new JSONResponse<JSONCart>()
                 .setStatus(true)
-                .setBody(listItems);
+                .setBody(jsonCart);
     }
 
     @Override
-    public CartResponseBody<List<Items>> getAllPurchasedItems(String userName) {
+    public JSONResponse<List<Items>> getAllPurchasedItems(String userName) {
 
         Users u = rest.getUser(userName);
+
+        if( u == null)
+            return new JSONResponse<List<Items>>().setStatus(false);
 
         List<String> list = u.getPurchaseHistory().orElse(new ArrayList<>());
 
@@ -80,25 +101,38 @@ public class CartServiceImpl implements CartService {
             listItems.add(i);
         });
 
-        return new CartResponseBody<List<Items>>()
+        return new JSONResponse<List<Items>>()
                 .setStatus(true)
                 .setBody(listItems);
     }
 
     @Override
-    public CartResponseBody<List<String>> itemPurchased(String itemId, String userName) {
-
+    public JSONResponse itemsPurchased(String userName) {
         Users u = rest.getUser(userName);
-        List<String> list = u.getPurchaseHistory().orElse(new ArrayList<>());
 
-        list.add(itemId);
-        u.setPurchaseHistory(list);
+        if(u == null)
+            return JSONResponse.negative();
 
-        if(!rest.updateUser(u))
-            return new CartResponseBody<List<String>>().setStatus(false);
+        List<String> checkoutList = u.getCheckoutList().orElse(new ArrayList<>());
 
-        return new CartResponseBody<List<String>>()
-                .setStatus(true)
-                .setBody(list);
+        if(checkoutList.size() > 0) {
+            List<String> purchaseList = u.getPurchaseHistory().orElse(new ArrayList<>());
+            purchaseList.addAll(checkoutList);
+            checkoutList = new ArrayList<>();
+
+            u.setCheckoutList(checkoutList);
+            u.setPurchaseHistory(purchaseList);
+
+
+            if (!rest.updateUser(u))
+                return JSONResponse.negative();
+        }
+
+        return JSONResponse.positive();
+    }
+
+    @Override
+    public JSONResponse getInvoice(String userName) {
+        return null;
     }
 }
